@@ -53,7 +53,7 @@ export class Handler {
 
 
     private async getResources(): Promise<any> {
-
+        
         const _data = new APIDao().query(`${REVISION_ID}`);
 
         const _resources: any = [];

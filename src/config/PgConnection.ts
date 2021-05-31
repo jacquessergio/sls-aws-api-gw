@@ -1,8 +1,8 @@
 import { Pool } from 'pg';
+const CONNECTION_STRING = process.env.PG_CONNECTION_STRING;
 
 export default new Pool ({
     max: 20,
-    //connectionString: 'postgres://postgres:postgres@localhost:5432/WSO2AM_DB',
-    connectionString: 'postgres://postgres:postgres@172.17.0.2:5432/WSO2AM_DB',
+    connectionString: `${CONNECTION_STRING}`,
     idleTimeoutMillis: 1000
 });
