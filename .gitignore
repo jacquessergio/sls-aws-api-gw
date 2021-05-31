@@ -74,6 +74,7 @@ typings/
 .env
 .env.test
 .build
+.serverless
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
