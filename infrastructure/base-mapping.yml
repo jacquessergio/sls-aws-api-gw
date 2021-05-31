@@ -10,7 +10,7 @@ resources:
     ApiGatewayBaseMapping:
       Type: AWS::ApiGateway::BasePathMapping
       Properties: 
-        BasePath: ${self:service}
+        BasePath: ${env:API_CONTEXT}
         DomainName: ${${self:custom.file}:domainName}
         RestApiId: 
             Fn::ImportValue: ${env:API_NAME}-RestApiId
