@@ -11,7 +11,7 @@ provider:
   resourcePolicy: ${${self:custom.file}:resourcePolicy}
   stage: dev
   timeout: 10
-  region: us-east-1
+  region: ${${self:custom.file}:region}
   environment:
     stage: ${self:custom.stage}
   vpc: ${${self:custom.file}:vpc}
