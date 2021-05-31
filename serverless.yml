@@ -1,0 +1,13 @@
+service: build-resources-from-api-url-mapping
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  build:
+    handler: handler.build
+
+plugins:
+  - serverless-plugin-scripts
+  - serverless-plugin-typescript

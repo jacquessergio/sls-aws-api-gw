@@ -1,0 +1,19 @@
+service: base-mapping-api-gw
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  file: file(./${self:custom.stage}.config.yml)
+provider:
+  name: aws
+  stage: dev
+resources:
+  Resources: 
+    ApiGatewayBaseMapping:
+      DependsOn:
+        - ApiGatewayRestApi
+      Type: AWS::ApiGateway::BasePathMapping
+      Properties: 
+        BasePath: ${self:service}
+        DomainName: ${${self:custom.file}:domainName}
+        RestApiId: 
+            Fn::ImportValue: ${self:service}-RestApiId
+        Stage: '${self:custom.stage}'

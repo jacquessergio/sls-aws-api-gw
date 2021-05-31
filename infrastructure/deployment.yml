@@ -1,0 +1,15 @@
+service: promote-stage-api-gw
+custom:
+  stage: ${opt:stage, self:provider.stage}
+provider:
+  name: aws
+  stage: dev
+resources:
+  Resources: 
+    ApiGatewayDeployment:
+      Type: AWS::ApiGateway::Deployment
+      Properties: 
+        Description: 'Description for ${self:custom.stage} - Deployment'
+        RestApiId: 
+          Fn::ImportValue: ${env:api_name}-RestApiId
+        StageName: ${self:custom.stage}

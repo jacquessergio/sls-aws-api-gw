@@ -1,0 +1,82 @@
+ApiGatewayRestApi:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: ${self:service}
+        Description: 'Description for ${self:service} - from Serverless'
+        DisableExecuteApiEndpoint: false
+        FailOnWarnings: true
+        Mode: merge #values merge or overwrite
+        Tags: 
+            - Key: apiName
+              Value: ${self:service}
+            - Key: version
+              Value: 1.0
+ApiGatewayAuthorizer:
+  DependsOn:
+    - ApiGatewayRestApi
+  Type: AWS::ApiGateway::Authorizer
+  Properties:
+    AuthorizerCredentials: 'arn:aws:iam::001849918413:role/api_gateway_auth_invocation'
+    AuthorizerResultTtlInSeconds: 300
+    AuthorizerUri:
+      Fn::Join:
+        - ''
+        -
+          - 'arn:aws:apigateway:'
+          - Ref: "AWS::Region"
+          - ':lambda:path/2015-03-31/functions/'
+          - 'arn:aws:lambda:'
+          - Ref: "AWS::Region"
+          - ':001849918413:function:api-auth-${self:custom.stage}-authorization'
+          - "/invocations"
+    IdentitySource: method.request.header.Authorization
+    IdentityValidationExpression: "^(Bearer )[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)$"
+    Name: keycloak_authorizer
+    RestApiId: { Ref: ApiGatewayRestApi }
+    Type: TOKEN
+ApiGatewayRequestValidator:
+  DependsOn:
+    - ApiGatewayRestApi
+  Type: AWS::ApiGateway::RequestValidator
+  Properties: 
+    Name: Authorization
+    RestApiId: 
+        Ref: ApiGatewayRestApi
+    ValidateRequestBody: false
+    ValidateRequestParameters: true
+ApiGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties: 
+        ResponseParameters: 
+            gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+            gatewayresponse.header.Access-Control-Allow-Headers: "'access-control-allow-origin,authorization,content-type,x-change-password-token,x-refresh-session,company'"
+            gatewayresponse.header.Access-Control-Allow-Methods: "'GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH'"
+            gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_5XX
+        RestApiId: 
+            Ref: ApiGatewayRestApi
+ApiGatewayResponseDefault4XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties: 
+        ResponseParameters: 
+            gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+            gatewayresponse.header.Access-Control-Allow-Headers: "'access-control-allow-origin,authorization,content-type,x-change-password-token,x-refresh-session,company'"
+            gatewayresponse.header.Access-Control-Allow-Methods: "'GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH'"
+            gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_4XX
+        RestApiId: 
+            Ref: ApiGatewayRestApi
+ApiGatewayResponseDefaultUnauthorized:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties: 
+        ResponseParameters: 
+            gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+            gatewayresponse.header.Access-Control-Allow-Headers: "'access-control-allow-origin,authorization,content-type,x-change-password-token,x-refresh-session,company'"
+            gatewayresponse.header.Access-Control-Allow-Methods: "'GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH'"
+            gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseTemplates:
+            application/json: '{"message":"Invalid or expired token"}'
+        ResponseType: UNAUTHORIZED
+        RestApiId: 
+            Ref: ApiGatewayRestApi
+        StatusCode: '401'

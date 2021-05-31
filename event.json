@@ -1,0 +1,25 @@
+{
+    "path": "/api/v1/menu",
+    "httpMethod": "GET",
+    "queryStringParameters": {
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Content-Type": "application/json",
+      "Host": "mhqknobpq0.execute-api.us-east-1.amazonaws.com",
+      "Postman-Token": "91a68309-0d2d-4a81-af5c-cabceb684a29",
+      "User-Agent": "PostmanRuntime/7.26.5",
+      "x-amzn-cipher-suite": "ECDHE-RSA-AES128-GCM-SHA256",
+      "x-amzn-tls-version": "TLSv1.2",
+      "x-amzn-vpc-id": "vpc-0b03c777b2b86c87b",
+      "x-amzn-vpce-config": "1",
+      "x-amzn-vpce-id": "vpce-0105762fffa170215",
+      "X-Forwarded-For": "10.95.0.30, 10.0.0.231",
+      "X-Forwarded-Port": "443",
+      "X-Forwarded-Proto": "https",
+      "X-Real-IP": "10.0.0.161",
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXQ2p3MWViRXB6MXAyNEE4Ny12THRoOU9ZMHRnLS1nOWFydUdQTlFfRHFrIn0.eyJleHAiOjE2MjIxMzg0NDYsImlhdCI6MTYyMjEzNjY0NiwianRpIjoiZDg3ZDIzYTMtMzNlZS00NmMxLWIxNjQtZTYzZGJiNWNlODZjIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5scHNici5jb20vYXV0aC9yZWFsbXMvbG9wZXNkaWdpdGFsIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjRiNWE2NzQxLWFhN2ItNGVkZC1hODdiLTAyMDhiZjEyM2EwZSIsInR5cCI6IkJlYXJlciIsImF6cCI6InBvcnRhbC13ZWIiLCJzZXNzaW9uX3N0YXRlIjoiMTg1NTNmMzMtYTU1Ni00ZDkzLWJkMDktNDFiYjRkNzM5NWEwIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2RldmZyb250cG9ydGFsdHFpLmxwc2JyLmNvbSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgbWljcm9wcm9maWxlLWp3dCBlbWFpbCIsInVwbiI6IjY0NjI4NjM0MDQxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiQWRtaW5pc3RyYXRvciIsImdyb3VwcyI6WyIvdXNlcl90eXBlL2FkbWluaXN0cmF0b3IiLCIvbW9kdWxlcy9jbXMiLCIvbW9kdWxlcy9wb3dlcmJpIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdLCJyZWFsbSI6ImxvcGVzZGlnaXRhbCIsInByZWZlcnJlZF91c2VybmFtZSI6IjY0NjI4NjM0MDQxIiwiZW1haWwiOiJhZG1pbmlzdHJhdG9yQGxwc2JyLmNvbSJ9.cnn821iVs9xmqMZ0ycWivq0B3Swz1FVFHIlyhdpXSINMLeUfCwBckB2UkHGPnEMgijgeQRgy0_Fnqik8Ub369ZILRgidppGZtGaHZx_9ReL_wf6sdEPwLZ8yjguytTuIm0cgoC5QGTVv6qoZlYJVBDiMEiHAfKFGz88HcK0dByZCV4YRBF931Deo-umpxTFVlZzyp_1EmJ_C0YsYkSf_In2hktn1VAIt6Azz5Ni1wtcfhHTyNUgNzMIuL-gPp0dmheqBOH1rnBk9lqDOlkwQ-FNo9vYRhQXpAEZqNdWy1dwxpULIN2XY5FtjWQuQbYiubm9qCnUCR5VK2FWUluzupg"
+      },
+    "body": "{\r\n        \"broker_id\": 1,\r\n        \"company_id\": 9,\r\n        \"description\": \"Apartamento com 2 dormit\u00F3rios\",\r\n        \"email\": \"pedro@gmail.com.br\",\r\n        \"lead_source\": \"VivaReal\",\r\n        \"name\": \"Pedro\",\r\n        \"origin\": \"C2S\",\r\n        \"partner_id\": \"1234abcd\",\r\n        \"phone\": \"(19) 99999-9999\",\r\n        \"prop_ref\": \"REO353798\"\r\n      }"
+}

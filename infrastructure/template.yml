@@ -1,0 +1,54 @@
+service: ${env:api_name, 'api-name'}
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  file: file(./config/${self:custom.stage}.config.yml)
+  resources: file(./resources/${env:api_name}.yml)
+provider:
+  name: aws
+  runtime: nodejs12.x
+  endpointType:  ${${self:custom.file}:endpointType}
+  vpcEndpointIds: ${${self:custom.file}:vpcEndpointIds}
+  resourcePolicy: ${${self:custom.file}:resourcePolicy}
+  stage: dev
+  timeout: 10
+  region: ${${self:custom.file}:region}
+  environment:
+    stage: ${self:custom.stage}
+  vpc: ${${self:custom.file}:vpc}
+package:
+  individually: true
+  exclude:
+     - /**
+     - .git
+     - handler.ts
+  package:
+  include:
+     - src/lambda/**
+functions:
+  proxyFunction:
+     name: '${self:service}-${self:custom.stage}-proxy'
+     description: 'Description for ${self:service} Function'
+     handler: ./src/lambda/Handler.proxy
+     environment:
+        base_url: ${env:base_url}
+     events: ${${self:custom.resources}:events}
+plugins:
+  - serverless-plugin-scripts
+  - serverless-plugin-typescript
+  - serverless-aws-documentation
+  - serverless-reqvalidator-plugin
+
+resources:
+  Resources: ${file(./infrastructure/resources.yml)}
+  Outputs:
+    RestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:service}-RestApiId
+    RootResourceId:
+        Value:
+          Fn::GetAtt: ApiGatewayRestApi.RootResourceId
+        Export:
+          Name: ${self:service}-RootResourceId
+

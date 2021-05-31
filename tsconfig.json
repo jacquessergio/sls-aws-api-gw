@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "preserveConstEnums": true,
+        "strictNullChecks": true,
+        "allowJs": true,
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true,
+        "outDir": ".build",
+        "rootDir": "./",
+        "moduleResolution": "node",
+        "lib": [
+            "es2015"
+        ],
+        "experimentalDecorators": true
+    },
+    "include": [
+        "src/**/*",
+        "src/lambda/Handler.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}

@@ -1,0 +1,9 @@
+endpointType: REGIONAL
+domainName: apis.lopes.com.br
+vpc:
+    securityGroupIds:
+      - sg-0ccd38d8e02f50dcf
+    subnetIds:
+      - subnet-05b147ea033ad84c6
+      - subnet-09a7c6aa5aad5a928
+      - subnet-01515dfeea3322a56
