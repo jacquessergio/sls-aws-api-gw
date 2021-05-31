@@ -3,7 +3,6 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   file: file(./config/${self:custom.stage}.config.yml)
   resources: file(./resources/${env:API_NAME}.yml)
-  region: ${${self:custom.file}:region} 
 provider:
   name: aws
   runtime: nodejs12.x
@@ -12,7 +11,7 @@ provider:
   resourcePolicy: ${${self:custom.file}:resourcePolicy}
   stage: dev
   timeout: 10
-  region: ${self:custom.region, 'us-east-1'}
+  region: ${${self:custom.file}:region, 'us-east-1'}
   environment:
     stage: ${self:custom.stage}
   vpc: ${${self:custom.file}:vpc}
