@@ -31,3 +31,4 @@ $ `serverless --config infrastructure/base-mapping.yml deploy --stage=<ambiente>
 
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html
+https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/serverless.yml.md

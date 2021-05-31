@@ -1,6 +1,12 @@
 service: ${env:API_NAME, 'api-name'}
-disabledDeprecations: '*'
+configValidationMode: warn 
 enableLocalInstallationFallback: false
+useDotenv: false 
+variablesResolutionMode: null
+unresolvedVariablesNotificationMode: warn 
+disabledDeprecations: 
+  - DEP_CODE_1 
+  - '*' 
 custom:
   stage: ${opt:stage, self:provider.stage}
   file: file(./config/${self:custom.stage}.config.yml)
