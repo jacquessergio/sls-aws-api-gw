@@ -4,7 +4,7 @@ ApiGatewayRestApi:
         Name: ${self:service}
         Description: 'Description for ${self:service} - from Serverless'
         DisableExecuteApiEndpoint: false
-        FailOnWarnings: true
+        FailOnWarnings: false
         Mode: merge #values merge or overwrite
         Tags: 
             - Key: apiName
