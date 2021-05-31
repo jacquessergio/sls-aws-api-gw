@@ -1,10 +1,9 @@
 service: ${env:API_NAME, 'api-name'}
-configValidationMode: warn 
 enableLocalInstallationFallback: false
-useDotenv: false 
+useDotenv: false
 variablesResolutionMode: null
-unresolvedVariablesNotificationMode: warn 
-disabledDeprecations: 
+unresolvedVariablesNotificationMode: warn
+disabledDeprecations:
   - DEP_CODE_1 
   - '*' 
 custom:
