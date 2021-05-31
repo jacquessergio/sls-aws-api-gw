@@ -1,7 +1,7 @@
 service: ${env:API_NAME, 'api-name'}
 custom:
   stage: ${opt:stage, self:provider.stage}
-  file: file(./config/${env:ENVIRONMENT}.config.yml)
+  file: file(./config/${self:custom.stage}.config.yml)
   resources: file(./resources/${env:API_NAME}.yml)
 provider:
   name: aws

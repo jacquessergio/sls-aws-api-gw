@@ -1,4 +1,4 @@
-region: us-east-1
+
 endpointType: PRIVATE
 domainName: apidev.lpsbr.com
 vpcEndpointIds:
@@ -16,3 +16,5 @@ resourcePolicy:
     Action: execute-api:Invoke
     Resource:
       - execute-api:/*/*/*
+
+region: us-east-1
