@@ -8,8 +8,6 @@ provider:
 resources:
   Resources: 
     ApiGatewayBaseMapping:
-      DependsOn:
-        - ApiGatewayRestApi
       Type: AWS::ApiGateway::BasePathMapping
       Properties: 
         BasePath: ${self:service}
