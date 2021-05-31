@@ -1,8 +1,8 @@
-service: ${env:api_name, 'api-name'}
+service: ${env:API_NAME, 'api-name'}
 custom:
   stage: ${opt:stage, self:provider.stage}
   file: file(./config/${self:custom.stage}.config.yml)
-  resources: file(./resources/${env:api_name}.yml)
+  resources: file(./resources/${env:API_NAME}.yml)
 provider:
   name: aws
   runtime: nodejs12.x
@@ -30,7 +30,7 @@ functions:
      description: 'Description for ${self:service} Function'
      handler: ./src/lambda/Handler.proxy
      environment:
-        base_url: ${env:base_url}
+        base_url: ${env:VHOST}
      events: ${${self:custom.resources}:events}
 plugins:
   - serverless-plugin-scripts
