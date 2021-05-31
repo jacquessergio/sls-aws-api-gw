@@ -2,9 +2,9 @@
 import * as fs from 'fs';
 import { APIDao } from "./dao/APIDao";
 import { lowerCase } from "lower-case";
-const STAGE = process.env.stage;
-const API_NAME = process.env.api_name;
-const REVISION_ID = process.env.revision_id;
+const STAGE = process.env.ENVIRONMENT;
+const API_NAME = process.env.API_NAME;
+const REVISION_ID = process.env.REVISION_ID;
 
 export class Handler {
 
