@@ -1,11 +1,11 @@
 
 ## Variaveis de ambiente
 
-$ `export api_name=<nome_api>`
+$ `export API_NAME=<nome_api>`
 
-$ `export stage=<ambiente>`
+$ `export ENVIRONMENT=<ambiente>`
 
-$ `export base_url=https://devbackportalbi.lpsbr.com`
+$ `export VHOST=https://devbackportalbi.lpsbr.com`
 
 ## Create resources base
 
