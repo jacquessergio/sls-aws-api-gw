@@ -1,6 +1,5 @@
 service: ${env:API_NAME, 'api-name'}
-disabledDeprecations:
-  - '*'
+disabledDeprecations: '*'
 custom:
   stage: ${opt:stage, self:provider.stage}
   file: file(./config/${self:custom.stage}.config.yml)
