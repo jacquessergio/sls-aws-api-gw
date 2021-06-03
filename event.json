@@ -1,6 +1,7 @@
 {
     "path": "/api/v1/menu",
     "httpMethod": "GET",
+    "stageVariables": { "host": "https://devbackportalbi.lpsbr.com", "environment": "dev" },
     "queryStringParameters": {
     },
     "headers": {

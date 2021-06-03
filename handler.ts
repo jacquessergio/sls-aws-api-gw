@@ -3,9 +3,7 @@ require('dotenv').config()
 
 import {Handler} from './src/handler'
 
-
 module.exports.build = async event => {
-
   
   const  main: Handler = new Handler();
   
@@ -22,3 +20,4 @@ module.exports.build = async event => {
     ),
   };
 };
+

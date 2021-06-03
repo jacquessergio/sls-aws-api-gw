@@ -1,31 +1,39 @@
 
 ## Variaveis de ambiente
 
-$ `export API_NAME=<nome_api>`
-
-$ `export ENVIRONMENT=<ambiente>`
-
-$ `export VHOST=https://devbackportalbi.lpsbr.com`
+    export API_NAME=<nome_api>
+    export ENVIRONMENT=<ambiente>
+    export VHOST=<host_backend>
 
 ## Create resources base
+<br />
 
-<b>Step_1</b> incia o processo para geração da estrutura de recursos da API - Salva arquivo na raiz do projeto )
+Gera a estrutura de recursos da API.
 
-$ `serverless invoke local -f build`
+    serverless invoke local -f build
+
 
 ## Create resources at AWS
+<br />
 
-<b>Step_2</b> inicia o processo de provisionamento dos recursos na AWS.)
+Obs. Somente os ambientes abaixo são válidos.
 
-$ `serverless --config infrastructure/template.yml deploy`
+    - dev
+    - qa
+    - stg
+    - prd
 
-## Promote Stage
+Provisiona os recursos necessários na AWS.
+    
+    serverless --config infrastructure/template.yml deploy --environment=<ambiente>
 
-$ `serverless --config infrastructure/deployment.yml deploy --stage=<ambiente>`
+Realiza o deploy no ambiente informado.
 
-## Base Mapping
+    serverless --config infrastructure/deployment.yml deploy --stage=<ambiente>
 
-$ `serverless --config infrastructure/base-mapping.yml deploy --stage=<ambiente>`
+Gera o contexto da API, mapeia em um dominio personalizado.
+
+    serverless --config infrastructure/base-mapping.yml deploy --stage=<ambiente>
 
 
 

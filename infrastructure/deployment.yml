@@ -1,9 +1,16 @@
-service: promote-stage-api-gw
+service: ${env:API_NAME}-gateway-deploy
 custom:
   stage: ${opt:stage, self:provider.stage}
+  file: file(./config/${self:custom.stage}.config.yml)
+  stages:
+    - dev
+    - qa
+    - stg
+    - prd
 provider:
   name: aws
   stage: dev
+  region: ${${self:custom.file}:region}
 resources:
   Resources: 
     ApiGatewayDeployment:
@@ -12,4 +19,22 @@ resources:
         Description: 'Description for ${self:custom.stage} - Deployment'
         RestApiId: 
           Fn::ImportValue: ${env:API_NAME}-RestApiId
+        #StageName: ${self:custom.stage}
+  
+    ApiGatewayStage:
+      DependsOn:
+        - ApiGatewayDeployment
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        DeploymentId:
+          Ref: ApiGatewayDeployment
+        RestApiId:
+          Fn::ImportValue: ${env:API_NAME}-RestApiId
         StageName: ${self:custom.stage}
+        Variables: 
+          host: ${env:VHOST}
+          environment: ${self:custom.stage}
+          lambdaAuthorizationName: api-auth-${self:custom.stage}-authorization
+      
+plugins:
+  - serverless-stage-manager

@@ -1,4 +1,5 @@
 endpointType: REGIONAL
+region: sa-east-1
 domainName: apis.lopes.com.br
 vpc:
     securityGroupIds:

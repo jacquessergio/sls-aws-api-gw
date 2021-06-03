@@ -1,5 +1,10 @@
 service: base-mapping-api-gw
 custom:
+  stages:
+    - dev
+    - qa
+    - stg
+    - prd
   stage: ${opt:stage, self:provider.stage}
   file: file(./config/${self:custom.stage}.config.yml)
 provider:
@@ -15,3 +20,5 @@ resources:
         RestApiId: 
             Fn::ImportValue: ${env:API_NAME}-RestApiId
         Stage: '${self:custom.stage}'
+plugins:
+  - serverless-stage-manager

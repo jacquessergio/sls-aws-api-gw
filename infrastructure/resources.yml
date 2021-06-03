@@ -2,7 +2,7 @@ ApiGatewayRestApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
         Name: ${self:service}
-        Description: 'Description for ${self:service} - from Serverless'
+        Description: 'Entry point for backend ${self:service}'
         DisableExecuteApiEndpoint: false
         FailOnWarnings: true
         Mode: merge #values merge or overwrite
@@ -27,10 +27,12 @@ ApiGatewayAuthorizer:
           - ':lambda:path/2015-03-31/functions/'
           - 'arn:aws:lambda:'
           - Ref: "AWS::Region"
-          - ':001849918413:function:api-auth-${self:custom.stage}-authorization'
+          - ':001849918413:function:'
+          - '$'
+          - '{stageVariables.lambdaAuthorizationName}'
           - "/invocations"
     IdentitySource: method.request.header.Authorization
-    IdentityValidationExpression: "^(Bearer )[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)$"
+    #IdentityValidationExpression: "^(Bearer )[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)$"
     Name: keycloak_authorizer
     RestApiId: { Ref: ApiGatewayRestApi }
     Type: TOKEN
@@ -80,3 +82,5 @@ ApiGatewayResponseDefaultUnauthorized:
         RestApiId: 
             Ref: ApiGatewayRestApi
         StatusCode: '401'
+
+

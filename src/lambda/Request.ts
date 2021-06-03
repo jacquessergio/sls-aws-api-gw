@@ -1,10 +1,9 @@
 'use strict'
 
+import { Util } from './Util';
+import { Model } from './Model';
 import { Config } from './Config';
 import { RestTemplate } from './RestTemplate';
-import { Model } from './Model';
-import { Util } from './Util';
-const URL = process.env.base_url;
 
 export class Request {
 
@@ -12,7 +11,8 @@ export class Request {
     private restService: RestTemplate;
 
     constructor(event: any) {
-        this.config = Util.config(event, URL);
+        const _url = event.stageVariables.host
+        this.config = Util.config(event, _url);
         this.restService = new RestTemplate(this.config);
     }
 

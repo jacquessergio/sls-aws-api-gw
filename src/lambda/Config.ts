@@ -10,6 +10,7 @@ export class Config {
     private queryStringParameters: any;
     private multiValueHeaders: any;
     private multiValueQueryStringParameters: any;
+    private stageVariables: any;
 
     constructor(params: any, uri?: any) {
         this.path = params.path;
@@ -21,7 +22,7 @@ export class Config {
         this.queryStringParameters = params.queryStringParameters;
         this.multiValueHeaders = params.multiValueHeaders;
         this.multiValueQueryStringParameters = params.multiValueQueryStringParameters;
-
+        this.stageVariables = params.stageVariables;
     }
 
     public get getPath(): string {
@@ -64,6 +65,9 @@ export class Config {
 
     public get getMultiValueQueryStringParameters(): any {
         return this.multiValueQueryStringParameters;
+    }
+    public get getStageVariables(): any {
+        return this.stageVariables;
     }
 
 }
