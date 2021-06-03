@@ -1,4 +1,4 @@
-service: base-mapping-api-gw
+service: ${env:API_NAME}-gateway-base-mapping
 custom:
   stages:
     - dev

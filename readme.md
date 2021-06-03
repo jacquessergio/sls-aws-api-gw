@@ -1,9 +1,10 @@
 
 ## Variaveis de ambiente
 
-    export API_NAME=<nome_api>
-    export ENVIRONMENT=<ambiente>
+    export API_NAME=<api_name>
     export VHOST=<host_backend>
+    export API_CONTEXT=<api_context>
+    export ENVIRONMENT=<environment>
 
 ## Create resources base
 <br />
