@@ -20,9 +20,10 @@ package:
   exclude:
      - ./src/lambda/**
      - ./handler.ts
-     - ./package.json
   include:
      - ./src/lambda/**
+     - ./package.json
+     - ./tsconfig.json
 functions:
   proxyFunction:
      name: '${self:service}-proxy'
