@@ -16,7 +16,7 @@ resources:
     ApiGatewayDeployment:
       Type: AWS::ApiGateway::Deployment
       Properties: 
-        Description: 'Description for ${self:custom.stage} - Deployment'
+        Description: 'Description for ${self:custom.stage} - Deployment2'
         RestApiId: 
           Fn::ImportValue: ${env:API_NAME}-RestApiId
         #StageName: ${self:custom.stage}
