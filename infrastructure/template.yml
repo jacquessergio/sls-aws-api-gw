@@ -19,8 +19,8 @@ package:
   individually: true
   exclude:
      - ./src/lambda/**
-     - ./src/lambda/**handler.ts
-     - ./src/lambda/**package.json
+     - ./handler.ts
+     - ./package.json
   include:
      - ./src/lambda/**
 functions:
