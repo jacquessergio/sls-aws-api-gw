@@ -1,6 +1,5 @@
 'use strict'
 import * as fs from 'fs';
-//import mergeFiles from 'merge-files';
 import { APIDao } from "./dao/APIDao";
 import { lowerCase } from "lower-case";
 const STAGE = process.env.ENVIRONMENT;
@@ -8,6 +7,7 @@ const API_NAME = process.env.API_NAME;
 const REVISION_ID = process.env.REVISION_ID;
 
 const _path = require('path')
+
 
 
 
@@ -44,28 +44,66 @@ export class Handler {
         const _VERSION = resources[0].version;
         const _FILE = `${_FULL_PATH}/${API_NAME}-${_VERSION}.yml`;
 
-        fs.mkdir(_FULL_PATH, { recursive: true }, (err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                const stream = fs.createWriteStream(lowerCase(`${_FILE}`));
+        await this.createDir(_FULL_PATH);
+        await this.sleep(400)
+        await this.createFileResources(lines, _FILE);
+        await this.sleep(1000)
+        await this.buildFileEvents(_FULL_PATH, _BASE_PATH);
+    }
+
+    private async createDir(_DIR) {
+        return new Promise((resolve) => {
+            fs.mkdir(_DIR, { recursive: true }, async (err, path) => {
+                if (err) {
+                    console.log(err)
+                    resolve(false)
+                } else {
+                    console.log(`directory -> ${path} <- created successfully!`)
+
+                    resolve(true);
+                }
+            })
+        })
+    }
+
+    private async createFileResources(lines: any[], file: string) {
+        return new Promise((resolve) => {
+            try {
+                const stream = fs.createWriteStream(lowerCase(`${file}`));
                 stream.once('open', function (fd) {
                     lines.forEach((line) => stream.write(`${line}`))
                 });
+                stream.once('close', () => {
+                    console.log('writer closed');
+                });
+
+                resolve(true);
+            } catch (err) {
+                console.log(`Erro: ${err}`);
+                resolve(false);
             }
-        })
-      
-        this.buildFileEvents(_FULL_PATH);
+        });
+
     }
 
-    private async buildFileEvents(_dir: string) {
-        const content: string[] = fs.readdirSync(_dir).map(file => fs.readFileSync(_path.join(_dir, file), 'utf8'));
-        const stream = fs.createWriteStream(lowerCase(`${_dir}/${API_NAME}.yml`));
+
+    private async buildFileEvents(_DIR: string, _PATH: string) {
+
+        const content: string[] = fs.readdirSync(_DIR).map(file => fs.readFileSync(_path.join(_DIR, file), 'utf8'));
+
+        const stream = fs.createWriteStream(lowerCase(`${_PATH}/${API_NAME}.yml`));
+        
+        console.log({ content })
+
         stream.once('open', function (fd) {
             stream.write(`events:\n`)
             content.forEach((line) => {
                 stream.write(`${line}`)
             })
+        });
+
+        stream.once('close', () => {
+            console.log('writer closed');
         });
     }
 
@@ -88,5 +126,9 @@ export class Handler {
             })
             return _resources;
         })
+    }
+
+    private sleep(milliseconds: any) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
     }
 }
