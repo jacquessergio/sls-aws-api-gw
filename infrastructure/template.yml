@@ -18,12 +18,12 @@ provider:
 package:
   individually: true
   exclude:
-     - /**
-     - .git
-     - handler.ts
-     - package.json
+     - ./**
+     - ./src/lambda/**
+     - ./src/lambda/**handler.ts
+     - ./src/lambda/**package.json
   include:
-     - src/lambda/**
+     - ./src/lambda/**
 functions:
   proxyFunction:
      name: '${self:service}-proxy'
