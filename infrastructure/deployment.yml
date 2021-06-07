@@ -19,7 +19,7 @@ resources:
         Description: 'Description for ${self:custom.stage} - Deployment2'
         RestApiId: 
           Fn::ImportValue: ${env:API_NAME}-RestApiId
-        StageName: ${self:custom.stage}
+        #StageName: teste
   
     ApiGatewayStage:
       DependsOn:
@@ -30,11 +30,21 @@ resources:
           Ref: ApiGatewayDeployment
         RestApiId:
           Fn::ImportValue: ${env:API_NAME}-RestApiId
-        #StageName: ${self:custom.stage}
+        StageName: ${self:custom.stage}
         Variables: 
           host: ${env:VHOST}
           environment: ${self:custom.stage}
           lambdaAuthorizationName: api-auth-${self:custom.stage}-authorization
-      
+
+    ApiGatewayDeploymentImpl:
+      DependsOn:
+        - ApiGatewayStage
+      Type: AWS::ApiGateway::Deployment
+      Properties: 
+        Description: 'Description for ${self:custom.stage} - Deployment2'
+        RestApiId: 
+          Fn::ImportValue: ${env:API_NAME}-RestApiId
+        StageName: ${self:custom.stage}
+
 plugins:
   - serverless-stage-manager
