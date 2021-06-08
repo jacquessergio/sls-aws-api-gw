@@ -19,7 +19,7 @@ resources:
         Description: 'Description for ${self:custom.stage} - Deployment2'
         RestApiId: 
           Fn::ImportValue: ${env:API_NAME}-RestApiId
-        StageName: dev
+        StageName: ${self:custom.stage}
         StageDescription:
           Variables:
             host: ${env:VHOST}
