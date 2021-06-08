@@ -27,7 +27,9 @@ ApiGatewayAuthorizer:
           - ':lambda:path/2015-03-31/functions/'
           - 'arn:aws:lambda:'
           - Ref: "AWS::Region"
-          - ':001849918413:function:'
+          - ':'
+          - Ref: 'AWS::AccountId'
+          - ':function:'
           - '$'
           - '{stageVariables.lambdaAuthorizationName}'
           - "/invocations"

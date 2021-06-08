@@ -50,3 +50,8 @@ resources:
           Fn::GetAtt: ApiGatewayRestApi.RootResourceId
         Export:
           Name: ${self:service}-RootResourceId
+    #DeploymentId:
+        #Value:
+          #Ref: "AWS::ApiGateway::Deployment"
+        #Export:
+          #Name: ${self:service}-DeploymentId
