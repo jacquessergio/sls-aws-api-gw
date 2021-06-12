@@ -9,6 +9,8 @@ provider:
 functions:
   build:
     handler: handler.build
+    environment:
+      BUCKET_NAME: 'api-gateway-lopes'
   deployment:
     handler: handler.deployment
     environment:
