@@ -27,11 +27,11 @@ export class S3 {
         console.log(`Uploading File => ${fileName}`);
         fileName = (folderName) ? folderName + '/' + fileName : fileName;
         const fileStream = fs.createReadStream('resources/' + fileName);
-        
+
         fileStream.on('error', function (err) {
             throw new Error(`Error Reading file ${fileName}: ${err}`);
         });
-        
+
         const uploadParams: any = {
             Bucket: bucketName,
             Key: fileName,
@@ -88,20 +88,20 @@ export class S3 {
         });
     }
 
-    public async getObjectByKey(bucketName: any, key: any) {
+    public getObjectByKey(bucketName: any, key: any) {
         console.log(`Getting Object by key => ${key}`);
         var bucketParams = {
             Bucket: bucketName,
             Key: key,
         };
 
-        return s3.getObject(bucketParams, (err: any, data: any) => {
+        s3.getObject(bucketParams, (err: any, data: any) => {
             if (err) {
                 throw new Error(`Error Getting Object: ${err}`);
             } else {
-                console.log(`File Getting Object ${data.ETag} successfully`)
+                console.log(`Save Object in = > resources/${key} successfully`)
                 fs.writeFileSync(`resources/${key}`, data.Body);
             }
-        })
+        });
     }
 }

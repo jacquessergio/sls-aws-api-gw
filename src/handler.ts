@@ -74,25 +74,8 @@ export class Handler {
                 .then(() => {
                     return this.getListFilesFromRemoteDir(_folderApi);
                 })
-                .then(async (files: any) => {
-                    files.forEach((file: any) => {
-                        this.getRemoteFileByKey(file.Key)
-                            .then((remoteFileFound) => {
-                                return remoteFileFound;
-                            })
-                            .then((remoteFile) => {
-                               // let localFile = this.getLocalFile(`${_basePath}/${file.Key}`);
-                                //if (localFile.exists)
-                                    //return { hasFileExists: true }
-
-                                //return { local: localFile.content, remote: remoteFile, hasFileExists: false }
-                            }).then(async (obj) => {
-                                //if (!obj.hasFileExists)
-                                    //this.copyContentRemoteFileToLocalFile(obj.remote, obj.local);
-                                
-                            })
-                    })
-                    await this.sleep(1000)
+                .then((files: any) => {
+                    files.forEach((file: any) => this.getRemoteFileByKey(file.Key))
                 })
                 .then(async () => {
                     await this.createFileWithStructureOfEventsForResourceFunction(_fullPath, _basePath);
@@ -103,24 +86,12 @@ export class Handler {
         }
     }
 
-    private copyContentRemoteFileToLocalFile(remoteFile: any, localFile: any) {
-        remoteFile.createReadStream().pipe(localFile);
-    }
-
-    private async getRemoteFileByKey(key: any) {
+    private getRemoteFileByKey(key: any) {
         return this.s3.getObjectByKey(_bucketName, key)
     }
 
     private getListFilesFromRemoteDir(folderName: any) {
         return this.s3.getListFiles(_bucketName, folderName);
-    }
-
-    private getLocalFile(file: any) {
-        if (fs.existsSync(file)) {
-            return { content: undefined, exists: true };
-        } else {
-            return { content: this.createLocalFile(file), exists: false };
-        }
     }
 
     private async getLocalFileAndUploadToRemoteDir(fileName: string, folderName: any) {
