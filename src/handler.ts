@@ -5,7 +5,6 @@
  */
 import * as fs from 'fs';
 import { APIDao } from './dao/APIDao';
-import { lowerCase } from 'lower-case';
 import { S3 } from './config/S3'
 const _stage = process.env.ENVIRONMENT;
 const _apiName = process.env.API_NAME;
@@ -114,7 +113,7 @@ export class Handler {
     }
 
     private createLocalFile(pathFile: string) {
-        return fs.createWriteStream(lowerCase(`${pathFile}`));
+        return fs.createWriteStream(`${pathFile}`.toLowerCase());
     }
 
     private async getContentAndCreateLocalFile(content: any[], fileName: string, folderName?: any) {

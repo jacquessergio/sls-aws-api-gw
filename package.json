@@ -14,7 +14,6 @@
     "class-transformer": "^0.3.1",
     "es6-shim": "^0.35.6",
     "jwt-decode": "^3.1.2",
-    "lower-case": "^2.0.2",
     "node-fetch": "^2.6.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13"
@@ -25,6 +24,7 @@
     "serverless": "1.83.0",
     "serverless-api-stage": "^1.4.0",
     "serverless-aws-documentation": "^1.1.0",
+    "serverless-plugin-optimize": "^4.2.1-rc.1",
     "serverless-plugin-scripts": "^1.0.2",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-reqvalidator-plugin": "1.0.3",

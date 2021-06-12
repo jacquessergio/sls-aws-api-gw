@@ -11,7 +11,6 @@ module.exports.build = async event => {
 };
 
 module.exports.deployment = async event => {
-  console.log({ event })
   const apigateway: ApiGateway = new ApiGateway();
   apigateway.createDeployment();
 };

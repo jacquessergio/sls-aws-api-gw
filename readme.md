@@ -42,3 +42,5 @@ Gera o contexto da API, mapeia em um dominio personalizado.
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html
 https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/serverless.yml.md
+
+https://www.serverless.com/plugins/serverless-plugin-optimize

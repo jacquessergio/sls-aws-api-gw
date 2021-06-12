@@ -44,4 +44,3 @@ resources:
 
 plugins:
   - serverless-stage-manager
-  - serverless-plugin-bind-deployment-id
