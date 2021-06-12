@@ -1,4 +1,4 @@
-import pool from "../config/PgConnection";
+import pool from "../config/PG";
 
 export class APIDao {
 

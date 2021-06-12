@@ -1,4 +1,4 @@
-service: build-resources-from-api-url-mapping
+service: build-resources
 
 provider:
   name: aws
@@ -7,6 +7,20 @@ provider:
 functions:
   build:
     handler: handler.build
+  cloudFormation:
+    handler: handler.cloudFormation
+  deployment:
+    handler: handler.deployment
+    environment:
+      stage: ${opt:environment}
+      restApiId: 
+        Fn::ImportValue: ${env:API_NAME}-RestApiId
+  basemapping:
+    handler: handler.basemapping
+    environment:
+      stage: ${opt:environment}
+      restApiId: 
+        Fn::ImportValue: ${env:API_NAME}-RestApiId
 
 plugins:
   - serverless-plugin-scripts

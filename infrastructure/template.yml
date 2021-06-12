@@ -5,6 +5,10 @@ custom:
   resources: file(./resources/${env:API_NAME}.yml)
   stages:
     - gateway
+  scripts:
+    hooks:
+      'deploy:finalize': sls invoke local -f deployment --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f basemapping --environment=${self:custom.environment}
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -37,6 +41,7 @@ plugins:
   - serverless-aws-documentation
   - serverless-reqvalidator-plugin
   - serverless-stage-manager
+  
 resources:
   Resources: ${file(./infrastructure/resources.yml)}
   Outputs:
@@ -50,8 +55,3 @@ resources:
           Fn::GetAtt: ApiGatewayRestApi.RootResourceId
         Export:
           Name: ${self:service}-RootResourceId
-    #DeploymentId:
-        #Value:
-          #Ref: "AWS::ApiGateway::Deployment"
-        #Export:
-          #Name: ${self:service}-DeploymentId

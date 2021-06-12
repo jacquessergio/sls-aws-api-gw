@@ -5,6 +5,7 @@
     export VHOST=<host_backend>
     export API_CONTEXT=<api_context>
     export ENVIRONMENT=<environment>
+    export BUCKET_NAME=<name>
 
 ## Create resources base
 <br />

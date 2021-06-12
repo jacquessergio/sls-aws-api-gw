@@ -12,11 +12,11 @@ provider:
   stage: dev
   region: ${${self:custom.file}:region}
 resources:
-  Resources: 
-    ApiGatewayDeployment:
+  Resources:
+   ApiGatewayDeployment:
       Type: AWS::ApiGateway::Deployment
       Properties: 
-        Description: 'Description for ${self:custom.stage} - Deployment2'
+        Description: 'Description for ${self:custom.stage} - Deployment5'
         RestApiId: 
           Fn::ImportValue: ${env:API_NAME}-RestApiId
         StageName: ${self:custom.stage}
@@ -44,3 +44,4 @@ resources:
 
 plugins:
   - serverless-stage-manager
+  - serverless-plugin-bind-deployment-id
