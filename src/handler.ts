@@ -73,8 +73,9 @@ export class Handler {
                 .then(() => {
                     return this.getListFilesFromRemoteDir(_folderApi);
                 })
-                .then((files: any) => {
+                .then(async (files: any) => {
                     files.forEach((file: any) => this.getRemoteFileByKey(file.Key))
+                    await this.sleep(1000);
                 })
                 .then(async () => {
                     await this.createFileWithStructureOfEventsForResourceFunction(_fullPath, _basePath);
