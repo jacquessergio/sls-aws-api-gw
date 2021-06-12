@@ -41,7 +41,7 @@ plugins:
   - serverless-aws-documentation
   - serverless-reqvalidator-plugin
   - serverless-stage-manager
-  - serverless-plugin-optimize
+  #- serverless-plugin-optimize
   
 resources:
   Resources: ${file(./infrastructure/resources.yml)}
