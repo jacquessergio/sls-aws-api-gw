@@ -7,8 +7,6 @@ provider:
 functions:
   build:
     handler: handler.build
-  cloudFormation:
-    handler: handler.cloudFormation
   deployment:
     handler: handler.deployment
     environment:
