@@ -95,6 +95,7 @@ export class Handler {
                 })
                 .then(async () => {
                     await this.createFileWithStructureOfEventsForResourceFunction(_fullPath, _basePath);
+                    await this.sleep(1000);
                 })
 
         } catch (err) {
