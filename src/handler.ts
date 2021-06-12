@@ -75,22 +75,21 @@ export class Handler {
                     return this.getListFilesFromRemoteDir(_folderApi);
                 })
                 .then(async (files: any) => {
-                    files.forEach(async (file: any) => {
+                    files.forEach((file: any) => {
                         this.getRemoteFileByKey(file.Key)
                             .then((remoteFileFound) => {
                                 return remoteFileFound;
                             })
                             .then((remoteFile) => {
-                                let localFile = this.getLocalFile(`${_basePath}/${file.Key}`);
-                                if (localFile.exists)
-                                    return { hasFileExists: true }
+                               // let localFile = this.getLocalFile(`${_basePath}/${file.Key}`);
+                                //if (localFile.exists)
+                                    //return { hasFileExists: true }
 
-                                return { local: localFile.content, remote: remoteFile, hasFileExists: false }
+                                //return { local: localFile.content, remote: remoteFile, hasFileExists: false }
                             }).then(async (obj) => {
-                                if (!obj.hasFileExists){
-                                    this.copyContentRemoteFileToLocalFile(obj.remote, obj.local);
-                                    await this.sleep(1000)
-                                }
+                                //if (!obj.hasFileExists)
+                                    //this.copyContentRemoteFileToLocalFile(obj.remote, obj.local);
+                                
                             })
                     })
                     await this.sleep(1000)

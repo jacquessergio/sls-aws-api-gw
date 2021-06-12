@@ -100,6 +100,7 @@ export class S3 {
                 throw new Error(`Error Getting Object: ${err}`);
             } else {
                 console.log(`File Getting Object ${data.ETag} successfully`)
+                fs.writeFileSync(`resources/${key}`, data.Body);
             }
         })
     }
