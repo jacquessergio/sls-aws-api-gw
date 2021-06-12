@@ -86,16 +86,17 @@ export class Handler {
                                     return { hasFileExists: true }
 
                                 return { local: localFile.content, remote: remoteFile, hasFileExists: false }
-                            }).then((obj) => {
-                                if (!obj.hasFileExists)
+                            }).then(async (obj) => {
+                                if (!obj.hasFileExists){
                                     this.copyContentRemoteFileToLocalFile(obj.remote, obj.local);
+                                    await this.sleep(1000)
+                                }
                             })
                     })
                     await this.sleep(1000)
                 })
                 .then(async () => {
                     await this.createFileWithStructureOfEventsForResourceFunction(_fullPath, _basePath);
-                    await this.sleep(1000);
                 })
 
         } catch (err) {
