@@ -1,18 +1,24 @@
 service: ${env:API_NAME, 'api-name'}
+#useDotenv: true
 custom:
-  environment: ${opt:environment, 'dev'} 
+  environment: ${opt:environment, 'dev'}
   file: file(./config/${self:custom.environment}.config.yml)
   resources: file(./resources/${env:API_NAME}.yml)
+  throttling: file(./infrastructure/throttling.yml)
+  cacheTimeout: file(./infrastructure/caching.yml)
   stages:
     - gateway
   scripts:
     hooks:
-      'deploy:finalize': sls invoke local -f deployment --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f basemapping --environment=${self:custom.environment}
-
+      "deploy:finalize": sls invoke local -f deployment --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f updatestage --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f basemapping --environment=${self:custom.environment}
+      #"deploy:finalize": sls invoke local -f deployment --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f usageplan --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f usageplanbymethod --environment=${self:custom.environment} --config ./serverless.yml && sls invoke local -f basemapping --environment=${self:custom.environment}
+  #apiGatewayThrottling: ${${self:custom.throttling}:apiGatewayThrottling}
+  #apiGatewayCaching: ${${self:custom.cacheTimeout}:apiGatewayCaching}
 provider:
   name: aws
+  #stackName: ${env:API_ID}
   runtime: nodejs12.x
-  endpointType:  ${${self:custom.file}:endpointType}
+  endpointType: ${${self:custom.file}:endpointType}
   vpcEndpointIds: ${${self:custom.file}:vpcEndpointIds}
   resourcePolicy: ${${self:custom.file}:resourcePolicy}
   stage: gateway
@@ -22,19 +28,19 @@ provider:
 package:
   individually: true
   exclude:
-     - ./src/lambda/**
-     - ./handler.ts
+    - ./src/lambda/**
+    - ./handler.ts
   include:
-     - ./src/lambda/**
-     - ./package.json
-     - ./tsconfig.json
+    - ./src/lambda/**
+    - ./package.json
+    - ./tsconfig.json
 functions:
   proxyFunction:
-     name: '${self:service}-proxy'
-     description: 'Function ${self:service}-proxy for backend layer integration'
-     handler: ./src/lambda/Handler.proxy
-     #disableLogs: true
-     events: ${${self:custom.resources}:events}
+    name: "${self:service}-proxy"
+    description: "Function ${self:service}-proxy for backend layer integration"
+    handler: ./src/lambda/Handler.proxy
+    #disableLogs: true
+    events: ${${self:custom.resources}:events}
 plugins:
   - serverless-plugin-scripts
   - serverless-plugin-typescript
@@ -42,17 +48,19 @@ plugins:
   - serverless-reqvalidator-plugin
   - serverless-stage-manager
   - serverless-plugin-optimize
-  
+  - serverless-api-gateway-throttling
+  - serverless-api-gateway-caching
+
 resources:
   Resources: ${file(./infrastructure/resources.yml)}
   Outputs:
     RestApiId:
-        Value:
-          Ref: ApiGatewayRestApi
-        Export:
-          Name: ${self:service}-RestApiId
+      Value:
+        Ref: ApiGatewayRestApi
+      Export:
+        Name: ${self:service}-RestApiId
     RootResourceId:
-        Value:
-          Fn::GetAtt: ApiGatewayRestApi.RootResourceId
-        Export:
-          Name: ${self:service}-RootResourceId
+      Value:
+        Fn::GetAtt: ApiGatewayRestApi.RootResourceId
+      Export:
+        Name: ${self:service}-RootResourceId

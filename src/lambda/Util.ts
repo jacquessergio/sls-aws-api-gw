@@ -1,5 +1,6 @@
 'use strict'
 import { Config } from './Config'
+import { Constants } from './Constants';
 const querystring = require('querystring');
 const jwt_decode = require('jwt-decode');
 
@@ -22,8 +23,8 @@ export class Util {
 
         let queryStringParameters: any = request.queryStringParameters;
         let multiValueQueryStringParameters: any = request.multiValueQueryStringParameters;
-        
-        console.log({multiValueQueryStringParameters})
+
+        console.log({ multiValueQueryStringParameters })
 
         if (queryStringParameters != null && queryStringParameters !== undefined) {
             queryStringParameters = querystring.stringify(multiValueQueryStringParameters)
@@ -62,6 +63,18 @@ export class Util {
             request.path = request.path.replace(firstLevel, 'api');
         }
         return request.path;
+    }
+
+    public static checkEnvironmentProduction(environment: any) {
+        return (environment.search(this.rgx(Constants.RGX_PREFIX_ENVIRONMENT_PRD)) == 0) ? true : false;
+    }
+
+    public static getUrlByEnvironment(host: any, environment: any) {
+        return (this.checkEnvironmentProduction(environment)) ? host : host.replace(this.rgx(Constants.RGX_ENVIRONMENT), `//${environment}`);
+    }
+
+    private static rgx(regex: any) {
+        return new RegExp(regex);
     }
 
 

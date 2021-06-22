@@ -1,0 +1,8 @@
+apiGatewayCaching:
+  enabled: true
+  clusterSize: "0.5"
+  ttlInSeconds: 300
+  dataEncrypted: false
+  perKeyInvalidation:
+    requireAuthorization: false
+    handleUnauthorizedRequests: Ignore

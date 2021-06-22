@@ -19,4 +19,6 @@ export class Constants {
     public static readonly REALM_NAME_INTEGRACAO: string = 'integracao';
     public static readonly PATNER_BLISQ: string = 'blisq';
     public static readonly PATNER_LPS_EDUARDO: string = 'lpseduardo';
+    public static readonly RGX_ENVIRONMENT: any = /(\/\/dev|\/\/qa|\/\/stg)/gm;
+    public static readonly RGX_PREFIX_ENVIRONMENT_PRD: any = /(prd|prod|production)/gm;
 }

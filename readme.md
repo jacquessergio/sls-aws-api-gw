@@ -6,6 +6,7 @@
     export API_CONTEXT=<api_context>
     export ENVIRONMENT=<environment>
     export BUCKET_NAME=<name>
+    export API_ID=<api_id>
 
 ## Create resources base
 <br />
@@ -44,3 +45,5 @@ https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apig
 https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/serverless.yml.md
 
 https://www.serverless.com/plugins/serverless-plugin-optimize
+https://www.npmjs.com/package/serverless-api-gateway-throttling
+https://www.npmjs.com/package/serverless-api-gateway-caching

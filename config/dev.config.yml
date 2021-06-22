@@ -3,16 +3,15 @@ endpointType: PRIVATE
 domainName: apidev.lpsbr.com
 vpcEndpointIds:
   - vpce-0105762fffa170215
-vpc:
-    securityGroupIds:
-      - sg-0dc6552f1daf8d6a2
-    subnetIds:
-      - subnet-021b5219bf449d941
-      - subnet-00decaaded4058bcf
-    
 resourcePolicy:
   - Effect: Allow
     Principal: '*'
     Action: execute-api:Invoke
     Resource:
       - execute-api:/*/*/*
+vpc:
+  securityGroupIds:
+    - sg-0dc6552f1daf8d6a2
+  subnetIds:
+    - subnet-021b5219bf449d941
+    - subnet-00decaaded4058bcf

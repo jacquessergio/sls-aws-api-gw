@@ -15,8 +15,11 @@
     "es6-shim": "^0.35.6",
     "jwt-decode": "^3.1.2",
     "node-fetch": "^2.6.0",
+    "nodejs-base64-encode": "^1.1.0",
     "pg": "^8.5.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "serverless-api-gateway-caching": "^1.7.3",
+    "serverless-api-gateway-throttling": "^1.1.0"
   },
   "devDependencies": {
     "@types/pg": "^8.6.0",

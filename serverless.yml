@@ -15,12 +15,35 @@ functions:
     handler: handler.deployment
     environment:
       stage: ${self:custom.environment}
-      restApiId: 
+      apiName: ${env:API_NAME}
+      restApiId:
         Fn::ImportValue: ${env:API_NAME}-RestApiId
   basemapping:
     handler: handler.basemapping
     environment:
       stage: ${self:custom.environment}
+      apiName: ${env:API_NAME}
+      restApiId: 
+        Fn::ImportValue: ${env:API_NAME}-RestApiId
+  usageplan:
+    handler: handler.updateUsagePlanByStage
+    environment:
+      stage: ${self:custom.environment}
+      apiName: ${env:API_NAME}
+      restApiId: 
+        Fn::ImportValue: ${env:API_NAME}-RestApiId
+  usageplanbymethod:
+    handler: handler.updateUsagePlanByStageAndMethod
+    environment:
+      stage: ${self:custom.environment}
+      apiName: ${env:API_NAME}
+      restApiId: 
+        Fn::ImportValue: ${env:API_NAME}-RestApiId
+  updatestage:
+    handler: handler.updateStage
+    environment:
+      stage: ${self:custom.environment}
+      apiName: ${env:API_NAME}
       restApiId: 
         Fn::ImportValue: ${env:API_NAME}-RestApiId
 

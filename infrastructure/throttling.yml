@@ -1,0 +1,3 @@
+apiGatewayThrottling:
+  maxRequestsPerSecond: 10000
+  maxConcurrentRequests: 5000
